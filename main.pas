@@ -20,12 +20,12 @@ type
     SaveDialog1: TSaveDialog;
     procedure EdgeBrowser1CreateWebViewCompleted(Sender: TCustomEdgeBrowser; AResult: HRESULT);
     procedure btnOpenClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure EdgeBrowser1WebMessageReceived(Sender: TCustomEdgeBrowser; Args: TWebMessageReceivedEventArgs);
     procedure btnShowAnnotationsClick(Sender: TObject);
     procedure btnAddAnnoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     procedure SavePdfRequest(Browser: TEdgeBrowser);
     procedure LoadPdfToBrowser(Browser: TEdgeBrowser; const PdfFilePath: string);
@@ -51,17 +51,17 @@ begin
   SetUIEnabled(False);
 end;
 
+procedure TpdfForm.FormShow(Sender: TObject);
+begin
+  EdgeBrowser1.CreateWebView
+end;
+
 procedure TpdfForm.SetUIEnabled(AEnabled: Boolean);
 begin
   btnOpen.Enabled := AEnabled;
   btnSave.Enabled := AEnabled;
   btnShowAnnotations.Enabled := AEnabled;
   btnAddAnno.Enabled := AEnabled;
-end;
-
-procedure TpdfForm.FormShow(Sender: TObject);
-begin
-  EdgeBrowser1.Navigate('https://pdfviewer.local/web/viewer.html?file=');  //?file= empty loads no pdf, can add pdf so that it gets loaded by default
 end;
 
 procedure TpdfForm.EdgeBrowser1CreateWebViewCompleted(Sender: TCustomEdgeBrowser; AResult: HRESULT);
@@ -79,10 +79,13 @@ begin
       //maps folder to host to prevent cors errors
       WebView3.SetVirtualHostNameToFolderMapping(
         'pdfviewer.local',
-        PChar('WebAssetsPath'),
+        PWideChar(WebAssetsPath),
         1
       );
+
       SetUIEnabled(True);
+
+       EdgeBrowser1.Navigate('https://pdfviewer.local/web/viewer.html?file=');  //?file= empty loads no pdf, can add pdf so that it gets loaded by default
     end;
   end;
 end;
