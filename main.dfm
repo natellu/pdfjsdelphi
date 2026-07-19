@@ -24,10 +24,6 @@ object pdfForm: TpdfForm
     UserDataFolder = '%LOCALAPPDATA%\bds.exe.WebView2'
     OnCreateWebViewCompleted = EdgeBrowser1CreateWebViewCompleted
     OnWebMessageReceived = EdgeBrowser1WebMessageReceived
-    ExplicitLeft = 304
-    ExplicitTop = 232
-    ExplicitWidth = 100
-    ExplicitHeight = 41
   end
   object FlowPanel1: TFlowPanel
     Left = 0
@@ -38,9 +34,6 @@ object pdfForm: TpdfForm
     Caption = 'FlowPanel1'
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = 248
-    ExplicitTop = 392
-    ExplicitWidth = 185
     object btnOpen: TButton
       Left = 1
       Top = 1
@@ -87,9 +80,6 @@ object pdfForm: TpdfForm
     Lines.Strings = (
       'Annotations:')
     TabOrder = 2
-    ExplicitLeft = 232
-    ExplicitTop = 440
-    ExplicitWidth = 185
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = 'pdf'
